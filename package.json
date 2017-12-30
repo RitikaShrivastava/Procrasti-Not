@@ -1,0 +1,9 @@
+{
+  "name": "procrastiNot",
+  "description": "a really cool messenger bot",
+  "version": "1.0.0",
+  "engines": {
+    "node": "9.3.0"
+    
+  }
+}
