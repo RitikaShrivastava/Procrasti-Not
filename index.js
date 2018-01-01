@@ -27,31 +27,29 @@ app.listen(app.get('port'), function() {
 	console.log('running on port', app.get('port'))
 })
 
+
+
+const token = "EAADoZB6oZAuZCEBALN5OZBUOhQyUbPSMQCHg2cXGPRnA5TVqPB3rMVoQUiXnMqUD45JTiZAJAVqDMHUffRb9IMv9E99nAkcw7aTYtZBWtO6H4RkwUZCtqOWJE0C58Q67jVe5DZCe3eO04iYz3rWpp6qinAIKQSO3CtlzjHEuNHgvYPaTZAR1nqMD5"
+
 app.post('/webhook/', function (req, res) {
-	let messaging_events = req.body.entry[0].messaging
-	for (let i = 0; i < messaging_events.length; i++) {
-		let event = req.body.entry[0].messaging[i]
-		let sender = event.sender.id
-		if (event.message && event.message.text) {
-			let text = event.message.text
-			if (text === 'Generic') {
-				sendGenericMessage(sender)
-				continue
-			}
-			sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
-		}
-		if (event.postback) {
-			let text = JSON.stringify(event.postback)
-			sendTextMessage(sender, "Postback received: "+text.substring(0, 200), token)
-			continue
-		}
-	}
-	res.sendStatus(200)
+    let messaging_events = req.body.entry[0].messaging
+    for (let i = 0; i < messaging_events.length; i++) {
+	    let event = req.body.entry[0].messaging[i]
+	    let sender = event.sender.id
+	    if (event.message && event.message.text) {
+		    let text = event.message.text
+		    if (text === 'Generic') {
+			    sendGenericMessage(sender)
+		    	continue
+		    }
+		    sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
+	    }
+    }
+    res.sendStatus(200)
 })
 
 
 
-const token = "<EAADoZB6oZAuZCEBAIY2CLEzMuGZBVzULZAXuJomFcc1kZCU2bZBET1ZCZCfdfa57yDMOYSBYYDvJ8gFMB87zOM9evACmkNC4IJUy0HNJ5g7t0BUNrgRqAOZCp3lLXOExOg5Vm6aA1ZAHHzPVGabuYZAsrxcLJRVhYS0esSY3ItUyZAb6hqhZB5EgJU6A92>"
 
 function sendTextMessage(sender, text) {
     let messageData = { text:text }
